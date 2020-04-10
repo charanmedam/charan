@@ -1,0 +1,32 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "charan_project";
+$conn =mysqli_connect($servername, $username, $password, $dbname);
+
+$uid=$_POST["id"];
+$ufirstname=$_POST["first_name"];
+$ulastname=$_POST["last_name"];
+$uemail=$_POST["email"];
+
+$q1="CREATE TABLE `charan_project`.`anvesh_table` ( `id` INT(5) NOT NULL , `first_name` VARCHAR(30) NOT NULL , `last_name` VARCHAR(30) NOT NULL , `email` VARCHAR(30) NOT NULL ) ENGINE = InnoDB";
+
+mysqli_query($conn,$q1);
+
+$q2="insert into charan_table values('$uid','$ufirstname','$ulastname','$uemail')";
+
+mysqli_query($conn,$q2);
+
+$q3="select * from charan_table";
+
+$result=mysqli_query($conn,$q3);
+
+$num=mysqli_num_rows($result);
+
+for($i=1;$i<=$num;$i++){
+    $row=mysqli_fetch_array($result);
+    echo $row['id']."&nbsp&nbsp&nbsp&nbsp&nbsp".$row['first_name']."&nbsp&nbsp&nbsp&nbsp&nbsp".$row['last_name']."&nbsp&nbsp&nbsp&nbsp&nbsp".$row['email']."<br>"; 
+}
+
+?>
